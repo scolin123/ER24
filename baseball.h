@@ -21,6 +21,7 @@ struct plateAppearance{
     char batter[50];
 };
 
+int parse_csv(const char *filename, struct pitch *pitches, int max_pitches);
 
 
 #endif
