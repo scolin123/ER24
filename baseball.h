@@ -22,6 +22,8 @@ struct plateAppearance{
 };
 
 int parse_csv(const char *filename, struct pitch *pitches, int max_pitches);
+int build_plate_appearance(struct pitch *pitches, int pitch_count, struct plateAppearance *pas, int max_pas);
+int popcount(int runners);
 
 
 #endif

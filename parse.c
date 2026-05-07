@@ -41,10 +41,14 @@ int parse_csv(const char *filename, struct pitch *pitches, int max_pitches){
         split_csv_line(buffer,fields,30);
         
         strncpy(pitches[pitch_count].half,fields[0],3);
+        pitches[pitch_count].half[3] = '\0';
         pitches[pitch_count].inning = atoi(fields[1]);
         pitches[pitch_count].outs = atoi(fields[2]);
         strncpy(pitches[pitch_count].batter,fields[13],49);
+        pitches[pitch_count].batter[49] = '\0';
         strncpy(pitches[pitch_count].outcome,fields[18],49);
+        pitches[pitch_count].outcome[49] = '\0';
+
         char *r = fields[21];
         pitches[pitch_count].runners = ((r[0] - '0') * 4) + ((r[1] - '0') * 2) + ((r[2] - '0') * 1);
 
