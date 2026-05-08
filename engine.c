@@ -60,3 +60,37 @@ int build_plate_appearance(struct pitch *pitches, int pitch_count, struct plateA
     }
     return pa_count;
 }
+
+void compute_re24(struct plateAppearance *pas, int pa_count, double re_totals[3][8], int re_counts[3][8]){
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 8; j++){
+            re_totals[i][j] = 0;
+            re_counts[i][j] = 0;
+            
+        }
+    }
+
+    for(int i = 0; i < pa_count; i++){
+        int o = pas[i].outs_before;
+        int r = pas[i].runners_before;
+        if(o < 0 || o > 2 || r < 0 || r > 7) continue;
+        re_totals[o][r] += pas[i].runs_scored;
+        re_counts[o][r]++;
+    }
+}
+
+void write_re24(double re_totals[3][8], int re_counts[3][8], const char *filename){
+    FILE *fp = fopen(filename, "w");
+    if(fp == NULL){
+        return;
+    }
+
+    fprintf(fp, "outs, runners, total_runs, pa_count\n");
+    for(int i =0; i < 3; i++){
+        for(int j = 0; j < 8; j++){
+            fprintf(fp, "%d,%d,%.4f,%d\n", i, j, re_totals[i][j], re_counts[i][j]);
+        }
+    }
+
+    fclose(fp);
+}

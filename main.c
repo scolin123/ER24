@@ -6,7 +6,7 @@
 #include "baseball.h"
 
 int main(void){
-    struct pitch pitches[20000];
+    static struct pitch pitches[20000];
 
 
     DIR *d = opendir("data/");
@@ -29,13 +29,20 @@ int main(void){
     closedir(d);
     printf("Total pitches: %d\n",pitch_count);
 
-    struct plateAppearance pas[2000];
-    build_plate_appearance(pitches,pitch_count,pas,2000);
+    static struct plateAppearance pas[3000];
+    int pa_count = build_plate_appearance(pitches, pitch_count, pas, 3000);
 
     for(int i = 0; i < 5; i++){
         printf("%s\n",pas[i].batter);
         printf("%d\n",pas[i].runs_scored);
     }
+    
+
+    double re_totals[3][8];
+    int re_counts[3][8];
+
+    compute_re24(pas, pa_count, re_totals, re_counts);
+    write_re24(re_totals, re_counts, "outputs/re24.csv");
 
     return 0;
 }
