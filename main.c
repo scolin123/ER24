@@ -32,6 +32,16 @@ int main(void){
     static struct plateAppearance pas[3000];
     int pa_count = build_plate_appearance(pitches, pitch_count, pas, 3000);
 
+    for(int i = 0; i < pa_count; i++){
+    if(pas[i].runs_scored < 0){
+        printf("%s | ob=%d rb=%d oa=%d ra=%d rs=%d\n",
+            pas[i].batter,
+            pas[i].outs_before, pas[i].runners_before,
+            pas[i].outs_after, pas[i].runners_after,
+            pas[i].runs_scored);
+        }
+    }
+
     for(int i = 0; i < 5; i++){
         printf("%s\n",pas[i].batter);
         printf("%d\n",pas[i].runs_scored);
