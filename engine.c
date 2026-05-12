@@ -94,3 +94,19 @@ void write_re24(double re_totals[3][8], int re_counts[3][8], const char *filenam
 
     fclose(fp);
 }
+
+void write_pas(struct plateAppearance *pas, int pa_count, const char *filename){
+    FILE *fp = fopen(filename, "w");
+    if(fp == NULL){
+        return;
+    }
+
+    fprintf(fp,"batter, outs_before, runners_before, runs_scored\n");
+    for(int i = 0; i < pa_count; i++){
+        fprintf(fp, "%s,%d,%d,%d\n", pas[i].batter, pas[i].outs_before, pas[i].runners_before,pas[i].runs_scored);
+
+    }
+
+    fclose(fp);
+
+}

@@ -26,6 +26,7 @@ int build_plate_appearance(struct pitch *pitches, int pitch_count, struct plateA
 int popcount(int runners);
 void compute_re24(struct plateAppearance *pas, int pa_count, double re_totals[3][8], int re_counts[3][8]);
 void write_re24(double re_totals[3][8], int re_counts[3][8], const char *filename);
+void write_pas(struct plateAppearance *pas, int pa_count, const char *filename);
 
 
 #endif
